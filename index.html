@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Rose Business!</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <style>
+        body{padding-top:50px;
+            background-color: lightpink}
+        .starter-template{padding:40px 15px;text-align:center;}
+    </style>
+
+   
+</head>
+
+<body>
+  <div class="container">
+    <div class = "col-md-8 col-md-offset-2">
+        <h2>Are you ready to start your Rose Business?</h2>
+      <p>First, let's go over the details.</p>
+      <ol>
+          <li>Your starting capital is $200.</li>
+          <li>Your hookup in the flower district can get you bulk roses at $0.50 each - or $6.00/dozen.</li>
+          <li>You have to buy at least 10 dozen, or 120 roses, in order to get this discount.</li>
+          <li>You can sell each rose for $2.00/each</li>
+          <li>Each day you sell a random number of roses, between 10 or 120.</li>
+          <li>As long as you have the capital ($60), you start each day with 120 roses. </li>
+      </ol>
+        <h3>Let's run some numbers.</h3>
+        <h4>Enter the number of days you've worked and check your estimated profitability</h4>
+        <input type="text" class="form-control" id="days"/>
+        <button class ="btn btn-danger" onclick="makingMoney()">Run the Business Model!</button>
+        <div id="business"></div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <script>
+
+        function init()
+        {    }
+// view   
+    function makingMoney()
+        {
+            var daysInBusiness = document.getElementById("days").value;
+            var content = " ";
+            for(var i=0; i<daysInBusiness; i++)
+                {
+            var day = i+1;  
+            var dailyNumberSold = rosesSoldRandom();
+            var numberSold = dailyNumberSold[1]
+            var profit = dailyNumberSold[0];
+            var startingBalance = 200;
+            var finalBalance =startingBalance + profit - 60;
+           
+            content += 'Bank Account: $'+startingBalance+'.';
+            content += '<br/>';
+            content += 'Number of Roses sold: '+numberSold+'.';
+            content += '<br/>';
+            content += 'Daily Profit: $'+profit+'.';
+            content += '<br/>';
+            content += 'End of Day Balance: $'+finalBalance;
+            content += '<br/>';
+            content += '<br/>';
+            content += '<br/>';
+           
+            }
+            document.getElementById('business').innerHTML = content;
+                
+        }
+//control -ish    
+        function rosesSoldRandom()
+        {
+            var min = 10;
+            var max = 120;
+            var rosesSold = Math.round((Math.random() * (max - min) + min)); 
+            console.log(rosesSold);
+         
+            
+            var pnl = rosesSold * 2;
+            return [pnl,rosesSold];
+        }
+        
+     
+       
+    </script>
+</body>
+</html>
